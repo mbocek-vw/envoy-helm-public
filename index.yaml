@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  gateway-helm:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-04-14T18:28:58.79135734Z"
+    description: An http Helm chart for envoy
+    digest: f58ff6003fd3b97b1d80a30d8b01d57e8ef8ef0e0be279aeff6e38692e987971
+    name: gateway-helm
+    type: application
+    urls:
+    - gateway-helm-0.0.8.tgz
+    version: 0.0.8
+generated: "2025-04-14T18:28:58.79136806Z"

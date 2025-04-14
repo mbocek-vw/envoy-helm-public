@@ -1,0 +1,4 @@
+owner: cariad-hyperion
+git-repo: envoy-helm-chart
+package-path: .cr-release-packages
+charts-dir: charts

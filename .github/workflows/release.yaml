@@ -1,0 +1,30 @@
+name: Release Charts
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write  # Needed to push to gh-pages and create releases
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up chart-releaser
+        uses: helm/chart-releaser-action@v1.5.0
+        env:
+          CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install chart-releaser CLI
+        run: |
+          curl -sSL https://github.com/helm/chart-releaser/releases/download/v1.7.0/chart-releaser_1.7.0_linux_amd64.tar.gz | tar xz
+          sudo mv cr /usr/local/bin/
+
+      - name: Upload and index chart to GitHub Pages
+        run: |
+          cr upload -o ${{ github.repository_owner }} -r ${{ github.repository }} --token "${{ secrets.GITHUB_TOKEN }}"
+          cr index -o ${{ github.repository_owner }} -r ${{ github.repository }} --charts-repo https://$GITHUB_REPOSITORY.github.io/$GITHUB_REPOSITORY --push
